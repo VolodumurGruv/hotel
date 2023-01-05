@@ -1,7 +1,7 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
-import { auth } from "../environments/intialFirebase";
+import { auth } from "../../environments/intialFirebase";
 
 const initialState = {
 	userName: null,
@@ -29,12 +29,14 @@ export const userLogout = createAsyncThunk("user/userLogout", async () => {
 export const userSlice = createSlice({
 	name: "user",
 	initialState,
+
 	reducers: {
 		setUser: (state, action) => {
 			state.userName = action.payload?.displayName;
 			state.imgUrl = action.payload?.photoURL;
 		},
 	},
+
 	extraReducers: (display) => {
 		display
 			.addCase(userAuth.fulfilled, (state, action) => {

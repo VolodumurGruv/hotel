@@ -1,7 +1,11 @@
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { userAuth, userLogout, setUser } from "../../features/userSlice";
+import {
+	userAuth,
+	userLogout,
+	setUser,
+} from "../../features/reducers/userSlice";
 import { auth } from "../../environments/intialFirebase";
 import "../../styles/login.css";
 import "../../styles/button.css";
