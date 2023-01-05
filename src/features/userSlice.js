@@ -1,10 +1,5 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import {
-	signInWithPopup,
-	GoogleAuthProvider,
-	signOut,
-	onAuthStateChanged,
-} from "firebase/auth";
+import { signInWithPopup, GoogleAuthProvider, signOut } from "firebase/auth";
 
 import { auth } from "../environments/intialFirebase";
 
@@ -12,17 +7,6 @@ const initialState = {
 	userName: null,
 	imgUrl: null,
 };
-
-// export const setUser = createAsyncThunk("user/isLoggedIn", async () => {
-// 	await onAuthStateChanged(auth, (u) => {
-// 		console.log(u?.displayName);
-// 		if (u) {
-// 			return u.displayName;
-// 		}
-// 		console.log("before null");
-// 		return null;
-// 	});
-// });
 
 export const userAuth = createAsyncThunk("user/userAuth", async () => {
 	try {
@@ -47,7 +31,6 @@ export const userSlice = createSlice({
 	initialState,
 	reducers: {
 		setUser: (state, action) => {
-			console.log(action.payload);
 			state.userName = action.payload?.displayName;
 			state.imgUrl = action.payload?.photoURL;
 		},
@@ -55,7 +38,6 @@ export const userSlice = createSlice({
 	extraReducers: (display) => {
 		display
 			.addCase(userAuth.fulfilled, (state, action) => {
-				console.log(action.payload);
 				state.userName = action.payload?.displayName;
 				state.imgUrl = action.payload?.photoURL;
 			})

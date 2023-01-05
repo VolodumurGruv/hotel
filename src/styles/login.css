@@ -1,12 +1,44 @@
+.login {
+	margin-top: 5rem;
+}
+
 .logo {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	padding: 20px;
-	text-align: center;
+	position: absolute;
+	color: #fff;
 }
 
 .logo-img {
 	border-radius: 50%;
 	width: 3rem;
+}
+
+.logo-text {
+	position: relative;
+	top: -1rem;
+	left: 0.5rem;
+	font-weight: 700;
+	font-size: 1.2rem;
+}
+
+.logo-logout--button {
+	position: relative;
+	top: -0.5rem;
+	left: 6rem;
+}
+
+.logo-login--btn svg {
+	width: 1.5rem;
+}
+
+.logo-login-text {
+	margin-left: 0.2rem;
+	font-size: 1rem;
+	font-weight: 600;
+}
+
+.logo-login--btn button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 0.8rem;
 }
