@@ -1,14 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-export const signupSlice = createSlice({
+const initialState = {
+	userName: null,
+	email: null,
+	password: null,
+	isSignedup: false,
+	isModalOpen: false,
+};
+
+const signupSlice = createSlice({
 	name: "signup",
-	intialState: {
-		userName: null,
-		email: null,
-		password: null,
-		isSignedup: false,
-		isModalOpen: false,
-	},
+	initialState,
 	reducers: {
 		signup: (state, action) => {
 			state.userName = action.payload;
