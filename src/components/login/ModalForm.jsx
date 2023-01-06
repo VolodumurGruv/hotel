@@ -1,19 +1,21 @@
 import { Button, Modal } from "antd";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { setIsModalOpen } from "../../features/reducers/signupSlice";
 
 function Modalform() {
-	// const { isModalOpen, setIsModalOpen } = useSelector((state) => state.signup);
+	const { isModalOpen } = useSelector((state) => state.signup);
+	const dispatch = useDispatch();
 
 	const showModal = () => {
-		// setIsModalOpen(true);
+		dispatch(setIsModalOpen(true));
 	};
 	const handleOk = () => {
-		// setIsModalOpen(false);
+		dispatch(setIsModalOpen(false));
 	};
 	const handleCancel = () => {
-		// setIsModalOpen(false);
+		dispatch(setIsModalOpen(false));
 	};
 	return (
 		<>
@@ -22,7 +24,7 @@ function Modalform() {
 			</Button>
 			<Modal
 				title="Basic Modal"
-				// open={isModalOpen}
+				open={isModalOpen}
 				onOk={handleOk}
 				onCancel={handleCancel}
 			>

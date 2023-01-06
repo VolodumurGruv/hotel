@@ -24,5 +24,5 @@ export function* signupWorkerSaga() {
 }
 
 export default function* signupSaga() {
-	yield takeEvery(LOGOUT, signupWorkerSaga);
+	yield takeEvery(SIGNUP, signupWorkerSaga);
 }
