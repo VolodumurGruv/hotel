@@ -1,31 +1,24 @@
-import { Menu, Space } from "antd";
-import { useState } from "react";
+import { Space } from "antd";
+import { useSelector } from "react-redux";
 import Login from "../login/Login";
 import Modalform from "../login/ModalForm";
 
 function MenuLayout() {
-	const [signUp, setSignUp] = useState(false);
-	const signUpAction = () => {
-		setSignUp(true);
-		console.log(signUp)
-	};
+	const { userName } = useSelector((state) => state.user);
 
 	return (
 		<>
-			<Menu theme="dark" mode="horizontal">
-				<Space>
-					<Login className="login" />
-					<div>
+			<Space>
+				<Login className="login" />
+				{userName == null && (
+					<>
 						<button className="btn">Signin</button>
-					</div>
-					<div>
-						<button className="btn" onClick={signUpAction}>
-							Signup
-						</button>
-					</div>
-				</Space>
-			</Menu>
-			<Modalform state={signUp}></Modalform>
+						<button className="btn">Signup</button>
+					</>
+				)}
+			</Space>
+
+			<Modalform></Modalform>
 		</>
 	);
 }

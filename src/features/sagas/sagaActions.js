@@ -4,4 +4,5 @@ export const sagaActions = {
 	SIGNIN: "SIGNIN",
 	SIGNUP: "SIGNUP",
 	ISLOGGEDIN: "ISLOGGEDIN",
+	ISMODALOPEN: "ISMODALOPEN",
 };

@@ -1,7 +1,6 @@
 import { Layout } from "antd";
 import { Header } from "antd/es/layout/layout";
 
-
 import MenuLayout from "./components/menuLayout/MenuLayout";
 import "./styles/login.css";
 
@@ -12,10 +11,11 @@ function App() {
 		<div>
 			<Layout>
 				<Header>
-					
-					<MenuLayout/>
+					<MenuLayout />
 				</Header>
-				<Content></Content>
+				<Content>
+				
+				</Content>
 				<Footer>Created by me</Footer>
 			</Layout>
 		</div>

@@ -1,33 +1,28 @@
 import { Button, Modal } from "antd";
 import Signup from "./Signup";
 import Signin from "./Signin";
-import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 
-function Modalform(props) {
-	const [isModalOpen, setIsModalOpen] = useState(false);
-
-	useEffect(() => {
-		setIsModalOpen(props.state);
-		console.log(isModalOpen, props.state);
-	}, []);
+function Modalform() {
+	// const { isModalOpen, setIsModalOpen } = useSelector((state) => state.signup);
 
 	const showModal = () => {
-		setIsModalOpen(true);
+		// setIsModalOpen(true);
 	};
 	const handleOk = () => {
-		setIsModalOpen(false);
+		// setIsModalOpen(false);
 	};
 	const handleCancel = () => {
-		setIsModalOpen(false);
+		// setIsModalOpen(false);
 	};
 	return (
 		<>
-			<Button type="primary" onClick={showModal}>
+			<Button type="primary" onClick={showModal} style={{ display: "none" }}>
 				Open Modal
 			</Button>
 			<Modal
 				title="Basic Modal"
-				open={isModalOpen}
+				// open={isModalOpen}
 				onOk={handleOk}
 				onCancel={handleCancel}
 			>

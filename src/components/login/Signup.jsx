@@ -26,6 +26,13 @@ function Signup() {
 			>
 				<Input />
 			</Form.Item>
+			<Form.Item
+				label="Email"
+				name="email"
+				rules={[{ required: true, message: "Please input your email!" }]}
+			>
+				<Input />
+			</Form.Item>
 
 			<Form.Item
 				label="Password"
@@ -34,13 +41,12 @@ function Signup() {
 			>
 				<Input.Password />
 			</Form.Item>
-
 			<Form.Item
-				name="remember"
-				valuePropName="checked"
-				wrapperCol={{ offset: 8, span: 16 }}
+				label="Confirm Password"
+				name="passwordConfirm"
+				rules={[{ required: true, message: "Please confirm your password!" }]}
 			>
-				<Checkbox>Remember me</Checkbox>
+				<Input.Password />
 			</Form.Item>
 
 			<Form.Item wrapperCol={{ offset: 8, span: 16 }}>

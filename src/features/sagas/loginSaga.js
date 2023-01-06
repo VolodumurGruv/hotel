@@ -35,7 +35,7 @@ export function* loginWorkerSaga() {
 	}
 }
 
-export function* loginSaga() {
+export default function* loginSaga() {
 	yield takeEvery(LOGIN, loginWorkerSaga);
 	yield takeEvery(LOGOUT, userLogout);
 }

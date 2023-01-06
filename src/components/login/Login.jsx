@@ -9,7 +9,7 @@ import SvgSelector from "../svgSelectors/SvgSelector";
 import { sagaActions } from "../../features/sagas/sagaActions";
 
 const Login = () => {
-	const { userName, imgUrl } = useSelector((state) => state.user);
+	const { userName, photoURL } = useSelector((state) => state.user);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -38,11 +38,10 @@ const Login = () => {
 	return (
 		<>
 			{userName !== null ? (
-				<div>
-					<div className="logo">
-						<img className="logo-img" src={imgUrl} alt="account image" />
-						<span className="logo-text">{userName}</span>
-					</div>
+				<div className="logo">
+					<img className="logo-img" src={photoURL} alt="account image" />
+
+					<span className="logo-text">{userName}</span>
 
 					<button className="logo-logout--button btn" onClick={logoutGoogle}>
 						Logout
