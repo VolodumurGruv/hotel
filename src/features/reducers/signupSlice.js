@@ -5,24 +5,24 @@ const initialState = {
 	email: null,
 	password: null,
 	isSignedup: false,
-	isModalOpen: false,
 };
 
 const signupSlice = createSlice({
 	name: "signup",
 	initialState,
 	reducers: {
-		signup: (state, action) => {
+		setSignup: (state, action) => {
 			state.userName = action.payload;
 			state.email = action.payload;
 			state.password = action.payload;
 		},
-		setIsModalOpen: (state, action) => {
-			state.isModalOpen = action.payload;
+		setIsSignedUp: (state, action) => {
+			
+			state.isSignedup = action.payload;
 		},
 	},
 });
 
-export const { signup, setIsModalOpen } = signupSlice.actions;
+export const { setSignup, setIsSignedUp } = signupSlice.actions;
 
 export default signupSlice.reducer;

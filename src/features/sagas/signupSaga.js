@@ -1,9 +1,9 @@
-import { takeEvery } from "@redux-saga/core/effects";
+import { call, takeEvery } from "@redux-saga/core/effects";
 import { sagaActions } from "./sagaActions";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../environments/intialFirebase";
 
-const { LOGOUT, SIGNUP } = sagaActions;
+const { ISSIGNUP } = sagaActions;
 
 const makeSignup = (auth, email, password) => {
 	createUserWithEmailAndPassword(auth, email, password)
@@ -24,5 +24,5 @@ export function* signupWorkerSaga() {
 }
 
 export default function* signupSaga() {
-	yield takeEvery(SIGNUP, signupWorkerSaga);
+	yield takeEvery(ISSIGNUP, signupWorkerSaga);
 }

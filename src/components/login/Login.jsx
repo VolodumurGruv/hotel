@@ -1,10 +1,10 @@
+import "../../styles/login.css";
+import "../../styles/button.css";
 import { onAuthStateChanged } from "firebase/auth";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setUser, removeUser } from "../../features/reducers/userSlice";
 import { auth } from "../../environments/intialFirebase";
-import "../../styles/login.css";
-import "../../styles/button.css";
 import SvgSelector from "../svgSelectors/SvgSelector";
 import { sagaActions } from "../../features/sagas/sagaActions";
 
