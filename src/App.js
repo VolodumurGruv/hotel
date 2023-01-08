@@ -13,10 +13,8 @@ function App() {
 				<Header>
 					<MenuLayout />
 				</Header>
-				<Content>
-				
-				</Content>
-				<Footer>Created by me</Footer>
+				<Content></Content>
+				<Footer>&copy; Created by Grushka Volodumur</Footer>
 			</Layout>
 		</div>
 	);

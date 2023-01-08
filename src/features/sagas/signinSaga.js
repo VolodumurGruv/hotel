@@ -2,22 +2,15 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../environments/intialFirebase";
 import { sagaActions } from "./sagaActions";
 import { call, takeEvery } from "redux-saga/effects";
+import { setSignin } from "../reducers/singinSlice";
 
 const onSignin = async (auth, email, password) => {
 	const res = await signInWithEmailAndPassword(auth, email, password);
-	// .then((userCredential) => {
-	// 	// Signed in
-	// 	const user = userCredential.user;
-	// 	// ...
-	// })
-	// .catch((error) => {
-	// 	const errorCode = error.code;
-	// 	const errorMessage = error.message;
-	// });
+
 	return res;
 };
+
 export function* handleSignin(actions) {
-	console.log(actions);
 	try {
 		const b = yield call(
 			onSignin,
@@ -26,12 +19,18 @@ export function* handleSignin(actions) {
 			actions.payload.password
 		);
 		console.log(b);
-		return sagaActions.SINGIN;
+		// setUser(actions.payload)
 	} catch (error) {
-		console.log("errore");
+		console.error(error);
+		console.log("Invalid email or password!");
 	}
+}
+
+export function* handleLoggedIn(actions) {
+	yield call(setSignin({ isSiggnedIn: actions.payload.isSiggnedIn }));
 }
 
 export default function* singinSaga() {
 	yield takeEvery(`${sagaActions.SINGIN}`, handleSignin);
+	yield takeEvery(`${sagaActions.ISLOGGEDIN}`, handleLoggedIn);
 }

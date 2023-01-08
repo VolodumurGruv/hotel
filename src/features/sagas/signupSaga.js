@@ -21,9 +21,12 @@ const onSignup = async (auth, email, password) => {
 };
 
 export function* handleSignup(actions) {
-	const d = yield call(onSignup, auth, actions.email, actions.password);
-	console.log(d);
-	yield call(test);
+	try {
+		const d = yield call(onSignup, auth, actions.email, actions.password);
+		console.log(d);
+	} catch (error) {
+		console.error(`Signup error: ${error}`);
+	}
 }
 
 export default function* signupSaga() {

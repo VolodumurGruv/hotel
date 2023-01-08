@@ -10,6 +10,7 @@ import { sagaActions } from "../../features/sagas/sagaActions";
 
 const Login = () => {
 	const { userName, photoURL } = useSelector((state) => state.user);
+	const { isSignedin } = useSelector((state) => state.signin);
 	const dispatch = useDispatch();
 
 	useEffect(() => {
@@ -37,7 +38,7 @@ const Login = () => {
 
 	return (
 		<>
-			{userName !== null ? (
+			{userName !== null || isSignedin ? (
 				<div className="logo">
 					<img className="logo-img" src={photoURL} alt="account image" />
 

@@ -4,7 +4,7 @@ import Login from "../login/Login";
 import Modalform from "../login/ModalForm";
 import { setIsModalOpen } from "../../features/reducers/modalSlice";
 import { setIsSignedUp } from "../../features/reducers/signupSlice";
-import { setIsSignedIn } from "../../features/reducers/singinSlice";
+import { setSigninBtn } from "../../features/reducers/singinSlice";
 
 const MenuLayout = () => {
 	const { userName } = useSelector((state) => state.user);
@@ -14,12 +14,12 @@ const MenuLayout = () => {
 	const handleSignupClick = () => {
 		dispatch(setIsModalOpen(true));
 		dispatch(setIsSignedUp(true));
-		dispatch(setIsSignedIn(false));
+		dispatch(setSigninBtn(false));
 	};
 
 	const handleSigninClick = () => {
 		dispatch(setIsModalOpen(true));
-		dispatch(setIsSignedIn(true));
+		dispatch(setSigninBtn(true));
 		dispatch(setIsSignedUp(false));
 	};
 

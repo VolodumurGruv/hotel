@@ -7,13 +7,22 @@ function Signin() {
 
 	const onFinish = (values) => {
 		console.log("Success:", values);
-		dispatch({ type: `${sagaActions.SINGIN}`, payload: values });
-	};
+		dispatch({
+			type: `${sagaActions.SINGIN}`,
+			payload: { ...values },
+		});
 
+		dispatch({type: sagaActions.ISLOGGEDIN, payload: {isLoggedIn: true}})
 	
+	};
 
 	const onFinishFailed = (errorInfo) => {
 		console.log("Failed:", errorInfo);
+		
+		/***************** */
+		// make a hadkerError sagas .... etc.
+		dispatch({type: sagaActions.ONERROR, payload: {errorInfo, isError: true}})
+		/***************** */
 	};
 
 	return (

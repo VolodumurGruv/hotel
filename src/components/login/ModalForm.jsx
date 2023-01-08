@@ -4,27 +4,26 @@ import Signin from "./Signin";
 import { useDispatch, useSelector } from "react-redux";
 import { setIsModalOpen } from "../../features/reducers/modalSlice";
 import { setIsSignedUp } from "../../features/reducers/signupSlice";
-import { setIsSignedIn } from "../../features/reducers/singinSlice";
+import { setSigninBtn } from "../../features/reducers/singinSlice";
+import { useEffect } from "react";
 
 function Modalform() {
 	const { isModalOpen } = useSelector((state) => state.modal);
 	const { isSignedup } = useSelector((state) => state.signup);
-	const { isSignedin } = useSelector((state) => state.signin);
+	const signinBtn = useSelector((state) => state.signin.signinBtn);
+
 	const dispatch = useDispatch();
 
-	const showModal = () => {
-		console.log(isModalOpen);
-		dispatch(setIsModalOpen(true));
-	};
+	const showModal = () => {};
 	const handleOk = () => {
 		dispatch(setIsModalOpen(false));
 		dispatch(setIsSignedUp(false));
-		dispatch(setIsSignedIn(false));
+		dispatch(setSigninBtn(false));
 	};
 	const handleCancel = () => {
 		dispatch(setIsModalOpen(false));
 		dispatch(setIsSignedUp(false));
-		dispatch(setIsSignedIn(false));
+		dispatch(setSigninBtn(false));
 	};
 
 	return (
@@ -39,7 +38,7 @@ function Modalform() {
 				onCancel={handleCancel}
 			>
 				{isSignedup && <Signup />}
-				{isSignedin && <Signin />}
+				{signinBtn && <Signin />}
 			</Modal>
 		</>
 	);
