@@ -1,8 +1,13 @@
 import { Button, Form, Input } from "antd";
-
+import { fn } from "moment";
+import { useDispatch } from "react-redux";
+import { sagaActions } from "../../features/sagas/sagaActions";
 function Signup() {
+	const dispatch = useDispatch();
+
 	const onFinish = (values) => {
 		console.log("Success:", values);
+		dispatch({ type: `${sagaActions.SINGUP}`, payload: values });
 	};
 
 	const onFinishFailed = (errorInfo) => {
@@ -14,7 +19,7 @@ function Signup() {
 			name="basic"
 			labelCol={{ span: 8 }}
 			wrapperCol={{ span: 16 }}
-			initialValues={{ remember: true }}
+			initialValues={{ remember: false }}
 			onFinish={onFinish}
 			onFinishFailed={onFinishFailed}
 			autoComplete="off"
@@ -29,7 +34,19 @@ function Signup() {
 			<Form.Item
 				label="Email"
 				name="email"
-				rules={[{ required: true, message: "Please input your email!" }]}
+				rules={[
+					{ required: true, message: "Please input your email!" },
+					() => ({
+						validator(_, value) {
+							if (value.match(/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g)) {
+								return Promise.resolve();
+							}
+							return Promise.reject(
+								new Error("The two passwords that you entered do not match!")
+							);
+						},
+					}),
+				]}
 			>
 				<Input />
 			</Form.Item>
@@ -44,7 +61,24 @@ function Signup() {
 			<Form.Item
 				label="Confirm Password"
 				name="passwordConfirm"
-				rules={[{ required: true, message: "Please confirm your password!" }]}
+				dependencies={["password"]}
+				hasFeedback
+				rules={[
+					{
+						required: true,
+						message: "Please confirm your password!",
+					},
+					({ getFieldValue }) => ({
+						validator(_, value) {
+							if (!value || getFieldValue("password") === value) {
+								return Promise.resolve();
+							}
+							return Promise.reject(
+								new Error("The two passwords that you entered do not match!")
+							);
+						},
+					}),
+				]}
 			>
 				<Input.Password />
 			</Form.Item>

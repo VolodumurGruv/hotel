@@ -6,8 +6,8 @@ import signupReducer from "./reducers/signupSlice";
 import signupSaga from "./sagas/signupSaga";
 import modalReducer from "./reducers/modalSlice";
 import signinReducer from "./reducers/singinSlice";
+import signinSaga from "./sagas/signinSaga";
 
-// look at example of using redux-toolkit + saga https://codesandbox.io/s/mfetp?file=/src/ListTodo.js
 
 const sagaMiddleware = createSagaMiddleware();
 
@@ -25,3 +25,4 @@ export default configureStore({
 
 sagaMiddleware.run(loginSaga);
 sagaMiddleware.run(signupSaga);
+sagaMiddleware.run(signinSaga);

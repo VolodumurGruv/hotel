@@ -3,26 +3,29 @@ import { sagaActions } from "./sagaActions";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../environments/intialFirebase";
 
-const { ISSIGNUP } = sagaActions;
-
-const makeSignup = (auth, email, password) => {
-	createUserWithEmailAndPassword(auth, email, password)
-		.then((userCredential) => {
-			// Signed in
-			const user = userCredential.user;
-			// ...
-		})
-		.catch((error) => {
-			const errorCode = error.code;
-			const errorMessage = error.message;
-			// ..
-		});
+const onSignup = async (auth, email, password) => {
+	console.log(auth);
+	const res = await createUserWithEmailAndPassword(auth, email, password);
+	// .then((userCredential) => {
+	// 	// Signed in
+	// 	const user = userCredential.user;
+	// 	// ...
+	// })
+	// .catch((error) => {
+	// 	const errorCode = error.code;
+	// 	const errorMessage = error.message;
+	// 	// ..
+	// });
+	console.log(res);
+	return res;
 };
 
-export function* signupWorkerSaga() {
-	console.log("signup saga");
+export function* handleSignup(actions) {
+	const d = yield call(onSignup, auth, actions.email, actions.password);
+	console.log(d);
+	yield call(test);
 }
 
 export default function* signupSaga() {
-	yield takeEvery(ISSIGNUP, signupWorkerSaga);
+	yield takeEvery(`${sagaActions.SINGUP}`, handleSignup);
 }
