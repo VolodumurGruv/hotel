@@ -18,8 +18,6 @@ export function* handleSignin(actions) {
 			actions.payload.email,
 			actions.payload.password
 		);
-		console.log(b);
-		// setUser(actions.payload)
 	} catch (error) {
 		console.error(error);
 		console.log("Invalid email or password!");
@@ -27,7 +25,12 @@ export function* handleSignin(actions) {
 }
 
 export function* handleLoggedIn(actions) {
-	yield call(setSignin({ isSiggnedIn: actions.payload.isSiggnedIn }));
+	try {
+		yield call(setSignin, actions.payload.isSiggnedIn);
+		console.log(actions);
+	} catch (error) {
+		console.error(error);
+	}
 }
 
 export default function* singinSaga() {

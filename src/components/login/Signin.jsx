@@ -12,16 +12,21 @@ function Signin() {
 			payload: { ...values },
 		});
 
-		dispatch({type: sagaActions.ISLOGGEDIN, payload: {isLoggedIn: true}})
-	
+		dispatch({
+			type: `${sagaActions.ISLOGGEDIN}`,
+			payload: { isSignedin: true },
+		});
 	};
 
 	const onFinishFailed = (errorInfo) => {
 		console.log("Failed:", errorInfo);
-		
+
 		/***************** */
 		// make a hadkerError sagas .... etc.
-		dispatch({type: sagaActions.ONERROR, payload: {errorInfo, isError: true}})
+		dispatch({
+			type: sagaActions.ONERROR,
+			payload: { errorInfo, isError: true },
+		});
 		/***************** */
 	};
 
