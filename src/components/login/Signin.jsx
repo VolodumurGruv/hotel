@@ -1,21 +1,11 @@
 import { Button, Form, Input } from "antd";
 import { useDispatch } from "react-redux";
-import { sagaActions } from "../../features/sagas/sagaActions";
 
 function Signin() {
 	const dispatch = useDispatch();
 
 	const onFinish = (values) => {
 		console.log("Success:", values);
-		dispatch({
-			type: `${sagaActions.SINGIN}`,
-			payload: { ...values },
-		});
-
-		dispatch({
-			type: `${sagaActions.ISLOGGEDIN}`,
-			payload: { isSignedin: true },
-		});
 	};
 
 	const onFinishFailed = (errorInfo) => {
@@ -23,10 +13,7 @@ function Signin() {
 
 		/***************** */
 		// make a hadkerError sagas .... etc.
-		dispatch({
-			type: sagaActions.ONERROR,
-			payload: { errorInfo, isError: true },
-		});
+
 		/***************** */
 	};
 
