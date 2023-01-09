@@ -28,17 +28,21 @@ function Signin() {
 
 				<Form
 					name="login"
-					labelCol={{ span: 8 }}
-					wrapperCol={{ span: 16 }}
+					labelCol={{ span: 5 }}
+					wrapperCol={{ span: 18 }}
 					initialValues={{ remember: true }}
 					onFinish={onFinish}
 					onFinishFailed={onFinishFailed}
 					autoComplete="off"
+					labelAlign="left"
 				>
 					<Form.Item
 						label="Username"
 						name="username"
-						rules={[{ required: true, message: "Please input your username!" }]}
+						rules={[
+							{ required: true, message: "Please input your username!" },
+							{ type: "string", min: 4 },
+						]}
 					>
 						<Input />
 					</Form.Item>
@@ -46,7 +50,10 @@ function Signin() {
 					<Form.Item
 						label="Password"
 						name="password"
-						rules={[{ required: true, message: "Please input your password!" }]}
+						rules={[
+							{ required: true, message: "Please input your password!" },
+							{ type: "string", min: 6 },
+						]}
 					>
 						<Input.Password />
 					</Form.Item>
