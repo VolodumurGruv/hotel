@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
 //reducers imports
 
-import signinReducer from "./reducers/singinSlice";
-import messageReducer from "./reducers/messageSlice";
+import signinReducer from "./slices/singinSlice";
+import messageReducer from "./slices/messageSlice";
 
 export default configureStore({
 	reducer: {

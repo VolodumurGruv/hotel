@@ -1,24 +1,31 @@
-import { Layout } from "antd";
-import { Header } from "antd/es/layout/layout";
-
-import MenuLayout from "./components/menuLayout/MenuLayout";
-import Message from "./components/message/Message";
 import "./styles/login.css";
+import "./styles/footer.css";
+import { Navigate, Route, Routes } from "react-router-dom";
 
-const { Content, Footer } = Layout;
+import Rooms from "./components/rooms/Rooms";
+import Room from "./components/rooms/Room";
+import Singin from "./components/login/Signin";
+import RootLayout from "./components/menuLayout/RootLayout";
+import { useSelector } from "react-redux";
 
 function App() {
+	const isSignedin = useSelector((state) => state.signin.isSignedin);
+
 	return (
-		<div>
-			<Message />
-			<Layout>
-				<Header>
-					<MenuLayout />
-				</Header>
-				<Content></Content>
-				<Footer>&copy; 2023 Created by Grushka Volodumur</Footer>
-			</Layout>
-		</div>
+		<Routes>
+			<Route path="/" element={<RootLayout />}>
+				<Route
+					index
+					element={isSignedin ? <Rooms /> : <Navigate to="/login" replace={true} />}
+				/>
+				<Route
+					path="/rooms/:id"
+					element={isSignedin ? <Room /> : <Navigate to="/login" replace={true} />}
+				/>
+				<Route path="*" element={<Navigate to="/" replace={true} />} />
+			</Route>
+			<Route path="/login" element={<Singin />} />
+		</Routes>
 	);
 }
 

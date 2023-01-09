@@ -1,22 +1,20 @@
-import { Space, Button } from "antd";
+import "../../styles/button.css";
+import { Button } from "antd";
 import { useDispatch } from "react-redux";
-import { setSigninBtn } from "../../features/reducers/singinSlice";
+import { setSignin } from "../../features/slices/singinSlice";
 
 const MenuLayout = () => {
 	const dispatch = useDispatch();
 
-	const handleSigninClick = () => {
-		dispatch(setSigninBtn(true));
+	const logout = () => {
+		dispatch(setSignin({ isSignedin: false }));
 	};
-
 	return (
-		<>
-			<Space size="middle">
-				<Button type="primary" onClick={handleSigninClick}>
-					Signin
-				</Button>
-			</Space>
-		</>
+		<div>
+			<Button className="logout-btn" ghost={true} onClick={logout}>
+				Logout
+			</Button>
+		</div>
 	);
 };
 
