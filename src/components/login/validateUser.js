@@ -4,16 +4,16 @@ get user from form
 compare name and password
 */
 
-import { getUsers } from "../../environments/realTimeFirebase";
+import { getDataFromDb } from "../../environments/firestoreDataBase";
 
 export const usersData = {};
 
-export const isUserExist = (formData) => {
-	getUsers((d) => Object.assign(usersData, d));
+export const isUserExist = (formData, dataName) => {
+	getDataFromDb(dataName, (d) => Object.assign(usersData, d.users));
 
 	for (const user in usersData) {
 		if (
-			user === formData.userName &&
+			user === formData.userName.trim() &&
 			usersData[user]["password"] === formData.password
 		)
 			return { ...usersData[user], user };

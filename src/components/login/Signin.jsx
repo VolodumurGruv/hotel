@@ -4,15 +4,15 @@ import { useNavigate } from "react-router-dom";
 import Message from "../message/Message";
 import { setError } from "../../features/slices/messageSlice";
 import { setSignin } from "../../features/slices/singinSlice";
-import { isUserExist, usersData } from "./validateUser";
+import { isUserExist } from "./validateUser";
 
 function Signin() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const onFinish = (values) => {
-		const user = isUserExist(values);
-		console.log(user.image);
+		const user = isUserExist(values, "users");
+
 		if (user?.user) {
 			dispatch(
 				setSignin({ userName: user.user, image: user.image, isSignedin: true })
@@ -24,7 +24,7 @@ function Signin() {
 		dispatch(
 			setError({
 				isMessage: true,
-				msg: "User doesn't exist or wrong password!",
+				msg: "Invalid username or wrong password!",
 				isError: true,
 			})
 		);
