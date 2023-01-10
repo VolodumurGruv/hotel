@@ -15,7 +15,6 @@ const messageSlice = createSlice({
 			state.isMessage = action.payload;
 		},
 		setError: (state, action) => {
-			console.log(action);
 			state.isMessage = action.payload.isMessage;
 			state.msg = action.payload.msg;
 			state.isError = action.payload.isError;
@@ -35,6 +34,7 @@ const messageSlice = createSlice({
 	},
 });
 
-export const { setMessage, setError, setSuccess, setToDefault } = messageSlice.actions;
+export const { setMessage, setError, setSuccess, setToDefault } =
+	messageSlice.actions;
 
 export default messageSlice.reducer;

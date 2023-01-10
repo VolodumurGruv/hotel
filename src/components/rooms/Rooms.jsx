@@ -5,7 +5,7 @@ import { addDataRealTimeDB } from "../../environments/realTimeFirebase";
 */
 import { useEffect } from "react";
 
-import { getRooms, getUsers } from "../../environments/realTimeFirebase";
+import { getRooms } from "../../environments/realTimeFirebase";
 function Rooms() {
 	/*for adding data to real time firebase uncomment this
 	--- ** data will be rewrited ** ----
@@ -16,12 +16,11 @@ function Rooms() {
 		addDataRealTimeDB("rooms", { rooms });
 	}, [rooms, users]);
 */
+	const rooms = [];
 
 	useEffect(() => {
-		getRooms();
-
-		getUsers();
-	});
+		getRooms((r) => Object.assign(rooms, r));
+	}, [rooms]);
 	return <div>Rooms</div>;
 }
 

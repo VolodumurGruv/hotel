@@ -2,23 +2,31 @@ import { Button, Form, Input, Checkbox } from "antd";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import Message from "../message/Message";
-import { setError, setSuccess } from "../../features/slices/messageSlice";
+import { setError } from "../../features/slices/messageSlice";
 import { setSignin } from "../../features/slices/singinSlice";
-import { isUserExist } from "./validateUser";
+import { isUserExist, usersData } from "./validateUser";
 
 function Signin() {
 	const dispatch = useDispatch();
 	const navigate = useNavigate();
 
 	const onFinish = (values) => {
-		if (isUserExist(values)) {
-			dispatch(setSignin({ userName: values.username, isSignedin: true }));
-			dispatch(setSuccess({ isMessage: true, msg: "Wellcome", isSuccess: true }));
+		const user = isUserExist(values);
+		console.log(user.image);
+		if (user?.user) {
+			dispatch(
+				setSignin({ userName: user.user, image: user.image, isSignedin: true })
+			);
+
 			return navigate("/");
 		}
 		// add message that user doesn't exist
 		dispatch(
-			setError({ isMessage: true, msg: "User doesn't exist!", isError: true })
+			setError({
+				isMessage: true,
+				msg: "User doesn't exist or wrong password!",
+				isError: true,
+			})
 		);
 	};
 
@@ -52,7 +60,7 @@ function Signin() {
 					>
 						<Form.Item
 							label="Username"
-							name="username"
+							name="userName"
 							rules={[
 								{ required: true, message: "Please input your username!" },
 								{ type: "string", min: 4 },

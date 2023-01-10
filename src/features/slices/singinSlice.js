@@ -2,6 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
 	userName: null,
+	image: null,
 	isSignedin: false,
 };
 
@@ -12,6 +13,7 @@ const signinSlice = createSlice({
 		setSignin: (state, action) => {
 			state.isSignedin = action.payload.isSignedin;
 			state.userName = action.payload.userName;
+			state.image = action.payload.image;
 		},
 	},
 });
