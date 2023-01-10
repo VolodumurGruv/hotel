@@ -4,9 +4,11 @@ import React from "react";
 import { Outlet } from "react-router";
 import MenuLayout from "./MenuLayout";
 
+
 function RootLayout() {
 	return (
 		<Layout className="layout">
+	
 			<Header>
 				<MenuLayout />
 			</Header>

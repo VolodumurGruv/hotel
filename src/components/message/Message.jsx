@@ -1,40 +1,24 @@
-import { Button, message, Space } from "antd";
-import { useDispatch } from "react-redux";
+import { message } from "antd";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { setToDefault } from "../../features/slices/messageSlice";
 
 const Message = () => {
 	const [messageApi, contextHolder] = message.useMessage();
+	const { isMessage, isError, msg } = useSelector((state) => state.message);
+	const dispatch = useDispatch();
 
-	const success = () => {
-		messageApi.open({
-			type: "success",
-			content: "This is a success message",
-		});
-	};
+	useEffect(() => {
+		if (isMessage) {
+			messageApi.open({
+				type: isError ? "error" : "success",
+				content: msg,
+			});
+			dispatch(setToDefault());
+		}
+	}, [isMessage]);
 
-	const error = () => {
-		messageApi.open({
-			type: "error",
-			content: "This is an error message",
-		});
-	};
-
-	const warning = () => {
-		messageApi.open({
-			type: "warning",
-			content: "This is a warning message",
-		});
-	};
-
-	return (
-		<>
-			{contextHolder}
-			<Space>
-				<Button onClick={success}>Success</Button>
-				<Button onClick={error}>Error</Button>
-				<Button onClick={warning}>Warning</Button>
-			</Space>
-		</>
-	);
+	return <>{contextHolder}</>;
 };
 
 export default Message;
