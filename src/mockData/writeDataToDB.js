@@ -1,3 +1,14 @@
+/*for edding data run this file in console like belove
+node path to file/firebaseConfig()
+*/
+
+const firebaseConfig = require("../environments/firebaseConfig");
+const { initializeApp } = require("firebase/app");
+const { collection, addDoc, getFirestore } = require("firebase/firestore");
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
 const getFetchData = async () => {
 	const fetchResult = {
 		error: null,
@@ -14,6 +25,10 @@ const getFetchData = async () => {
 				}
 			}
 		});
+
+		const docRef = await addDoc(collection(db, "hotel"), { ...data });
+		console.log("Document written with ID: ", docRef.id);
+
 		return data;
 	} catch (error) {
 		console.error(`An error occurs in getFetchData: ${error}`);
@@ -23,3 +38,5 @@ const getFetchData = async () => {
 		return fetchResult;
 	}
 };
+
+getFetchData();

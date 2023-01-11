@@ -7,7 +7,7 @@ import {
 	doc,
 	onSnapshot,
 } from "firebase/firestore";
-import { getFetchData } from "../mockData/getFetchData";
+import { getFetchData } from "../mockData/writeDataToDB";
 
 // connecting to firestorage
 const db = getFirestore(app);
@@ -46,7 +46,7 @@ export const getDataFromDb = async (dataName, fn) => {
 			// }
 			console.dir(data);
 			// fn(result);
-			// fn(doc.data());
+			fn(doc.data());
 		});
 
 		return dataDbMsg;

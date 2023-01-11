@@ -11,8 +11,8 @@ function Signin() {
 	const navigate = useNavigate();
 
 	const onFinish = (values) => {
-		const user = isUserExist(values, "users");
-
+		const user = isUserExist(values, "hotel");
+		console.log(user);
 		if (user?.user) {
 			dispatch(
 				setSignin({ userName: user.user, image: user.image, isSignedin: true })

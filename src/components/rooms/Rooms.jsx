@@ -120,7 +120,7 @@ function Rooms() {
 	];
 
 	useEffect(() => {
-		getDataFromDb("rooms", (a) => (rooms = a));
+		getDataFromDb("hotel", (a) => (rooms = a));
 	}, []);
 	console.log(Array.isArray(rooms));
 	console.log(rooms.length);
