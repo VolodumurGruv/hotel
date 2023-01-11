@@ -39,13 +39,13 @@ export const getDataFromDb = async (dataName, fn) => {
 
 		querySnapshot.forEach((doc) => {
 			const data = doc.data().rooms;
-			for (const room of doc.data().rooms) {
-				for (const key in room) {
-					result.push((dataName[key] = doc.data().rooms[room][key]));
-				}
-			}
-			console.log(result);
-			fn(result);
+			// for (const room of doc.data().rooms) {
+			// 	for (const key in room) {
+			// 		result.push((dataName[key] = doc.data().rooms[room][key]));
+			// 	}
+			// }
+			console.dir(data);
+			// fn(result);
 			// fn(doc.data());
 		});
 

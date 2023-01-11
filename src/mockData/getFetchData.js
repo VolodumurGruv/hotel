@@ -1,4 +1,4 @@
-export const getFetchData = async () => {
+const getFetchData = async () => {
 	const fetchResult = {
 		error: null,
 	};
@@ -7,6 +7,13 @@ export const getFetchData = async () => {
 	try {
 		const res = await fetch(url);
 		const data = await res.json();
+		data.Rooms.forEach((room) => {
+			for (const key in room) {
+				if (key === "description") {
+					room[key] = room[key].split("\n").join(" ");
+				}
+			}
+		});
 		return data;
 	} catch (error) {
 		console.error(`An error occurs in getFetchData: ${error}`);
