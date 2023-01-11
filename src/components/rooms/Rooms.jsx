@@ -5,23 +5,27 @@
 // 	getDataFromDb,
 // } from "../../environments/firestoreDataBase";
 // import { addDataRealTimeDB } from "../../environments/realTimeFirebase";
+import app from "../../environments/intialFirebase";
+import { getFirestore, collection, getDocs } from "firebase/firestore";
 
 import { useEffect } from "react";
 import { Table, Button } from "antd";
 
+import { getDataFromDb } from "../../environments/firestoreDataBase";
+import parseToDataTable from "./parseDataToTable";
+import { setRooms } from "../../features/slices/roomsSlice";
 import { getRooms } from "../../environments/realTimeFirebase";
 function Rooms() {
 	// for adding data to real time firebase uncomment this
 	// --- ** data will be rewrited ** ----
 	// const users = getHotelMockData.getUsers();
-	// const rooms2 = getHotelMockData.getAllRooms();
+	// const rooms = getHotelMockData.getAllRooms();
 	// useEffect(() => {
-	// 	addDataToDb("users", { users });
-	// 	addDataToDb("rooms", { rooms2 });
-	// 	getDataFromDb("users");
+	// addDataToDb("users", { users });
+	// addDataToDb("rooms", { rooms });
 	// }, []);
 
-	const rooms = [];
+	let rooms = [];
 
 	const columns = [
 		{
@@ -32,7 +36,6 @@ function Rooms() {
 		{
 			title: "Type",
 			dataIndex: "type",
-			defaultSortOrder: "descend",
 			filters: [
 				{
 					text: "Standard",
@@ -43,7 +46,7 @@ function Rooms() {
 					value: "Suite",
 				},
 			],
-			onFilter: (value, record) => record.address.indexOf(value) === 0,
+			// onFilter: (value, record) => record.address.indexOf(value) === 0,
 		},
 		{
 			title: "Occupancy",
@@ -58,7 +61,7 @@ function Rooms() {
 					value: "Suite",
 				},
 			],
-			onFilter: (value, record) => record.address.indexOf(value) === 0,
+			// onFilter: (value, record) => record.address.indexOf(value) === 0,
 		},
 		{
 			title: "Price",
@@ -71,8 +74,12 @@ function Rooms() {
 			dataIndex: "guest",
 			filters: [
 				{
-					text: "Suite",
-					value: "Suite",
+					text: "Golden Branch",
+					value: "Golden Branch",
+				},
+				{
+					text: "Ratliff Schwartz",
+					value: "Ratliff Schwartz",
 				},
 			],
 			onFilter: (value, record) => record.address.indexOf(value) === 0,
@@ -113,10 +120,11 @@ function Rooms() {
 	];
 
 	useEffect(() => {
-		getRooms((r) => Object.assign(rooms, r));
-
-		console.log(rooms.length);
-	}, [rooms]);
+		getDataFromDb("rooms", (a) => (rooms = a));
+	}, []);
+	console.log(Array.isArray(rooms));
+	console.log(rooms.length);
+	console.log(rooms);
 
 	const onChange = (pagination, filters, sorter, extra) => {
 		console.log("params", pagination, filters, sorter, extra);

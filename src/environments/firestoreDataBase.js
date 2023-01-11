@@ -1,5 +1,12 @@
 import app from "./intialFirebase";
-import { getFirestore, collection, addDoc, getDocs } from "firebase/firestore";
+import {
+	getFirestore,
+	collection,
+	addDoc,
+	getDocs,
+	doc,
+	onSnapshot,
+} from "firebase/firestore";
 import { getFetchData } from "../mockData/getFetchData";
 
 // connecting to firestorage
@@ -27,11 +34,19 @@ export const addDataToDb = async (dataName, data) => {
 
 export const getDataFromDb = async (dataName, fn) => {
 	try {
+		const result = [];
 		const querySnapshot = await getDocs(collection(db, dataName));
+
 		querySnapshot.forEach((doc) => {
-			dataDbMsg[doc.id] = doc.data();
-			console.log(doc.data());
-			fn(doc.data());
+			const data = doc.data().rooms;
+			for (const room of doc.data().rooms) {
+				for (const key in room) {
+					result.push((dataName[key] = doc.data().rooms[room][key]));
+				}
+			}
+			console.log(result);
+			fn(result);
+			// fn(doc.data());
 		});
 
 		return dataDbMsg;

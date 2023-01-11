@@ -7,7 +7,7 @@ const getHotelMockData = {
 	},
 	getRoomById(idx) {
 		const rooms = this.getAllRooms();
-		return ([...rooms].id = idx);
+		return rooms.filter((id) => rooms[id] === idx);
 	},
 
 	getUsers() {
