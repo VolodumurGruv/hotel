@@ -11,7 +11,7 @@ function Signin() {
 	const navigate = useNavigate();
 
 	const onFinish = (values) => {
-		const user = isUserExist(values, "hotel");
+		const user = isUserExist(values);
 		console.log(user);
 		if (user?.user) {
 			dispatch(

@@ -8,8 +8,8 @@ import { getDataFromDb } from "../../environments/firestoreDataBase";
 
 export const usersData = {};
 
-export const isUserExist = (formData, dataName) => {
-	getDataFromDb(dataName, (d) => Object.assign(usersData, d.users));
+export const isUserExist = (formData) => {
+	getDataFromDb((d) => Object.assign(usersData, d.Accounts));
 
 	for (const user in usersData) {
 		if (

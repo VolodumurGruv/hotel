@@ -25,7 +25,7 @@ function Rooms() {
 	// addDataToDb("rooms", { rooms });
 	// }, []);
 
-	let rooms = [];
+	let rooms = {};
 
 	const columns = [
 		{
@@ -118,19 +118,25 @@ function Rooms() {
 			address: "London No. 2 Lake Park",
 		},
 	];
+	const setRooms = () => {
+		getDataFromDb((a) => Object.assign(rooms, { ...a.Rooms }));
+		console.log(rooms[0]);
+		return rooms;
+	};
 
 	useEffect(() => {
-		getDataFromDb("hotel", (a) => (rooms = a));
+		let count = 0;
+		// getDataFromDb((a) => Object.assign(rooms, { ...a.Rooms }));
+		console.log(setRooms()[0]);
 	}, []);
-	console.log(Array.isArray(rooms));
-	console.log(rooms.length);
-	console.log(rooms);
+
+	console.log(rooms.id);
 
 	const onChange = (pagination, filters, sorter, extra) => {
 		console.log("params", pagination, filters, sorter, extra);
 	};
 
-	return <Table columns={columns} dataSource={rooms} onChange={onChange} />;
+	return <Table columns={columns} dataSource={[rooms]} onChange={onChange} />;
 }
 
 export default Rooms;

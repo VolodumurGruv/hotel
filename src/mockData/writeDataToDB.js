@@ -4,7 +4,12 @@ node path to file/firebaseConfig()
 
 const firebaseConfig = require("../environments/firebaseConfig");
 const { initializeApp } = require("firebase/app");
-const { collection, addDoc, getFirestore } = require("firebase/firestore");
+const {
+	collection,
+	addDoc,
+	getFirestore,
+	getDocs,
+} = require("firebase/firestore");
 
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
@@ -40,3 +45,11 @@ const getFetchData = async () => {
 };
 
 getFetchData();
+
+// take data from DB
+// const getDataDB = async () => {
+// 	const querySnapshot = await getDocs(collection(db, "hotel"));
+// 	querySnapshot.forEach((doc) => console.log(doc.data()));
+// };
+
+// getDataDB();
