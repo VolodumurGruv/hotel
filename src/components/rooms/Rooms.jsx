@@ -3,12 +3,14 @@ import { Table } from "antd";
 import { columns, data } from "./tableData";
 
 import { getDataFromDb } from "../../environments/firestoreDataBase";
+import parseToDataTable from "./parseDataToTable";
 function Rooms() {
 	let rooms = {};
 
 	const setRooms = () => {
 		getDataFromDb((a) => Object.assign(rooms, a));
 		console.log(rooms.Accounts); /*undefined*/
+		console.log(rooms); /*{Accounts: {...}, Rooms:[{...}]}*/
 		return rooms;
 	};
 

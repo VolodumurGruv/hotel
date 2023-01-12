@@ -29,9 +29,6 @@ export const getDataFromDb = async (fn) => {
 		const querySnapshot = await getDocs(collection(db, "hotel"));
 
 		querySnapshot.forEach((doc) => {
-			const data = doc.data();
-
-			
 			fn(doc.data());
 		});
 
