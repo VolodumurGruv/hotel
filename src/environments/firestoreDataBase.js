@@ -24,15 +24,18 @@ export const addDataToDb = async (dataName, data) => {
 	}
 };
 
+const rooms = {};
+
 export const getDataFromDb = async (fn) => {
 	try {
 		const querySnapshot = await getDocs(collection(db, "hotel"));
 
 		querySnapshot.forEach((doc) => {
 			fn(doc.data());
+			// rooms.data = doc.data();
 		});
 
-		return dataDbMsg;
+		return rooms;
 	} catch (error) {
 		console.error(`An error occurs in getting data from DB: ${error}`);
 		dataDbMsg.error = `An error occurs in getting data from DB: ${error}`;

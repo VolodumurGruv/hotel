@@ -7,18 +7,11 @@ import parseToDataTable from "./parseDataToTable";
 function Rooms() {
 	let rooms = {};
 
-	const setRooms = () => {
-		getDataFromDb((a) => Object.assign(rooms, a));
-		console.log(rooms.Accounts); /*undefined*/
-		console.log(rooms); /*{Accounts: {...}, Rooms:[{...}]}*/
-		return rooms;
-	};
-
 	useEffect(() => {
 		// getDataFromDb((a) => Object.assign(rooms, { ...a.Rooms }));
-		console.log(setRooms());
+		getDataFromDb().then((b) => (rooms.data = b.data.Rooms));
 	}, []);
-
+	console.log(rooms.data);
 	const onChange = (pagination, filters, sorter, extra) => {
 		console.log("params", pagination, filters, sorter, extra);
 	};
