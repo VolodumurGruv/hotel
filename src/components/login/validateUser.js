@@ -15,8 +15,9 @@ export const isUserExist = (formData) => {
 		if (
 			user === formData.userName.trim() &&
 			usersData[user]["password"] === formData.password
-		)
+		) {
 			return { ...usersData[user], user };
+		}
 	}
 	return false;
 };

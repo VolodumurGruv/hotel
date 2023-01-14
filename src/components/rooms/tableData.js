@@ -1,5 +1,3 @@
-import { Button } from "antd";
-
 export const columns = [
 	{
 		title: "Number",
@@ -12,29 +10,41 @@ export const columns = [
 		filters: [
 			{
 				text: "Standard",
-				value: "Standard",
+				value: "standard",
 			},
 			{
 				text: "Suite",
-				value: "Suite",
+				value: "suite",
 			},
 		],
-		// onFilter: (value, record) => record.address.indexOf(value) === 0,
+		onFilter: (value, record) => record.type.indexOf(value) === 0,
 	},
 	{
 		title: "Occupancy",
 		dataIndex: "occupancy",
 		filters: [
 			{
-				text: "Standard",
-				value: "Standard",
+				text: "One",
+				value: 1,
 			},
 			{
-				text: "Suite",
-				value: "Suite",
+				text: "Two",
+				value: 2,
+			},
+			{
+				text: "Three",
+				value: 3,
+			},
+			{
+				text: "Four",
+				value: 4,
+			},
+			{
+				text: "Five",
+				value: 5,
 			},
 		],
-		// onFilter: (value, record) => record.address.indexOf(value) === 0,
+		onFilter: (value, record) => record.occupancy === value,
 	},
 	{
 		title: "Price",
@@ -55,39 +65,10 @@ export const columns = [
 				value: "Ratliff Schwartz",
 			},
 		],
-		onFilter: (value, record) => record.address.indexOf(value) === 0,
+		onFilter: (value, record) => record.guest.indexOf(value) === 0,
 	},
 	{
 		title: "",
 		dataIndex: "button",
-	},
-];
-export const data = [
-	{
-		key: "1",
-		number: 1,
-		type: "John Brown",
-		occupancy: 32,
-		price: "New York No. 1 Lake Park",
-		guest: "",
-		button: <Button type="primary">More information</Button>,
-	},
-	{
-		key: "2",
-		name: "Jim Green",
-		age: 42,
-		address: "London No. 1 Lake Park",
-	},
-	{
-		key: "3",
-		name: "Joe Black",
-		age: 32,
-		address: "Sidney No. 1 Lake Park",
-	},
-	{
-		key: "4",
-		name: "Jim Red",
-		age: 32,
-		address: "London No. 2 Lake Park",
 	},
 ];

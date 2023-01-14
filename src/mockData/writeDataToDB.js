@@ -14,6 +14,19 @@ const {
 const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 
+const tetsdata = {
+	Accoutnts: {
+		user1: { name: "Bob" },
+		user2: { name: "John" },
+	},
+	Rooms: {
+		one: { romm: "One" },
+		two: { romm: "two" },
+		three: { romm: "Three" },
+		fourth: { romm: "Fourth" },
+	},
+};
+
 const getFetchData = async () => {
 	const fetchResult = {
 		error: null,
@@ -21,20 +34,20 @@ const getFetchData = async () => {
 	const url =
 		"https://remotemode.com/files/intership/front-end/firebase-data.json";
 	try {
-		const res = await fetch(url);
-		const data = await res.json();
-		data.Rooms.forEach((room) => {
-			for (const key in room) {
-				if (key === "description") {
-					room[key] = room[key].split("\n").join(" ");
-				}
-			}
-		});
+		// const res = await fetch(url);
+		// const data = await res.json();
+		// data.Rooms.forEach((room) => {
+		// 	for (const key in room) {
+		// 		if (key === "description") {
+		// 			room[key] = room[key].split("\n").join(" ");
+		// 		}
+		// 	}
+		// });
 
-		const docRef = await addDoc(collection(db, "hotel"), { ...data });
+		const docRef = await addDoc(collection(db, "test"), tetsdata);
 		console.log("Document written with ID: ", docRef.id);
 
-		return data;
+		// return data;
 	} catch (error) {
 		console.error(`An error occurs in getFetchData: ${error}`);
 

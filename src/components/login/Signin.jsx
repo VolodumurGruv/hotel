@@ -12,7 +12,7 @@ function Signin() {
 
 	const onFinish = (values) => {
 		const user = isUserExist(values);
-		console.log(user);
+
 		if (user?.user) {
 			dispatch(
 				setSignin({ userName: user.user, image: user.image, isSignedin: true })

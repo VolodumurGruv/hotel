@@ -1,22 +1,54 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { Table } from "antd";
-import { columns, data } from "./tableData";
+import { columns } from "./tableData";
 
 import { getDataFromDb } from "../../environments/firestoreDataBase";
-import parseToDataTable from "./parseDataToTable";
+import { Button } from "antd";
+import { useNavigate } from "react-router-dom";
+
 function Rooms() {
-	let rooms = {};
+	const [rooms, setRooms] = useState([]);
+
+	const roomDetail = (e) => {
+		console.log(e.target);
+		// const navigate = useNavigate();
+		// return navigate(`/room/:${id}`);
+	};
+
+	const button = (
+		<Button type="primary" onClick={roomDetail}>
+			More information
+		</Button>
+	);
+
+	const parseToDataTable = (d) => {
+		const res = [];
+		for (const elem of d) {
+			for (const key in elem) {
+				if (key === "id") {
+					elem["key"] = elem[key];
+				}
+			}
+			elem["button"] = button;
+			res.push(elem);
+		}
+
+		return res;
+	};
 
 	useEffect(() => {
-		// getDataFromDb((a) => Object.assign(rooms, { ...a.Rooms }));
-		getDataFromDb().then((b) => (rooms.data = b.data.Rooms));
+		getDataFromDb((a) => {
+			const dataRooms = [...a.Rooms];
+
+			setRooms(parseToDataTable(dataRooms));
+		});
 	}, []);
-	console.log(rooms.data);
+
 	const onChange = (pagination, filters, sorter, extra) => {
 		console.log("params", pagination, filters, sorter, extra);
 	};
 
-	return <Table columns={columns} dataSource={[rooms]} onChange={onChange} />;
+	return <Table columns={columns} dataSource={rooms} onChange={onChange} />;
 }
 
 export default Rooms;
